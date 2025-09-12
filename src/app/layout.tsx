@@ -18,6 +18,9 @@ export const metadata: Metadata = {
     icon: "/icons/icon-192.png",
     apple: "/icons/apple-touch-icon.png",
   },
+  other: {
+    "color-scheme": "light",
+  },
 };
 
 export default function RootLayout({
