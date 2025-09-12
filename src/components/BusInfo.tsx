@@ -6,10 +6,18 @@ export default function BusInfo({ buses }: { buses: Bus[] }) {
       <ul className="flex gap-2">
         {buses.map((bus, idx) => (
           <li key={idx} className="flex-grow px-4 py-2 rounded-xl bg-[#EAF5EC]">
-            <p className="font-bold text-xl text-center">{bus.eta}후</p>
-            <p className="font-semibold mb-2 text-center text-xs">
-              [ {bus.position} ]
+            <p className="font-bold text-xl text-center">
+              {bus.eta === "곧 도착" || bus.eta === "출발 준비"
+                ? bus.eta
+                : `${bus.eta}후`}
             </p>
+
+            {!(bus.eta === "곧 도착" || bus.eta === "출발 준비") && (
+              <p className="font-semibold mb-2 text-center text-xs">
+                [ {bus.position} ]
+              </p>
+            )}
+
             <p className="text-gray-500">도착 시간: {bus.arrival_time}</p>
             <p className="text-gray-400">
               {bus.bus_no} ({" "}
