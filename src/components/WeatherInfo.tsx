@@ -33,30 +33,33 @@ export default function WeatherInfo({ weather }: { weather: Weather[] }) {
   return (
     <section>
       {/* 현재 날씨 */}
-      <div className="p-4 flex gap-4 justify-center items-center rounded-xl bg-[#EAF5D4] border-gray-200 mb-2">
-        <div className="relative w-25 h-25 flex items-center justify-center">
-          <Image
-            src={skyCodeIconMap[current.sky_code]}
-            alt="날씨 아이콘"
-            fill
-            className="object-cover rounded-xl"
-            sizes="(max-width: 768px) 25vw, (max-width: 1200px) 10vw, 64px"
-          />
-        </div>
-        <div>
-          <p className="text-gray-600 text-base">
-            {current.temp}℃ ({current.humidity}%)
-          </p>
-          {[7, 8, 9].includes(current.sky_code) && (
-            <>
-              <p className="font-semibold text-base">
-                {current.precipitation_amount}
-              </p>
-            </>
-          )}
-          {current.wind !== "약한 바람" && (
-            <p className="font-semibold text-base">{current.wind}</p>
-          )}
+      <div className="p-4 rounded-xl bg-[#EAF5D4] border-gray-200 mb-2">
+        <p className="text-center font-semibold text-gray-800">현재 날씨</p>
+        <div className="flex gap-4 justify-center items-center ">
+          <div className="relative w-25 h-25 flex items-center justify-center">
+            <Image
+              src={skyCodeIconMap[current.sky_code]}
+              alt="날씨 아이콘"
+              fill
+              className="object-cover rounded-xl"
+              sizes="(max-width: 768px) 25vw, (max-width: 1200px) 10vw, 64px"
+            />
+          </div>
+          <div>
+            <p className="text-gray-600 text-base">
+              {current.temp}℃ ({current.humidity}%)
+            </p>
+            {[7, 8, 9].includes(current.sky_code) && (
+              <>
+                <p className="font-semibold text-base">
+                  {current.precipitation_amount}
+                </p>
+              </>
+            )}
+            {current.wind !== "약한 바람" && (
+              <p className="font-semibold text-base">{current.wind}</p>
+            )}
+          </div>
         </div>
       </div>
 
