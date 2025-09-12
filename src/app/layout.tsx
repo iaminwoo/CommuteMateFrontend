@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   icons: {
     icon: "/icons/icon-192.png",
-    apple: "/icons/icon-192.png",
+    apple: "/icons/apple-touch-icon.png",
   },
 };
 
@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={SUIT.className}>
-      <body className="bg-white min-h-screen">{children}</body>
+      <body>{children}</body>
     </html>
   );
 }
