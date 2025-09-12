@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={SUIT.className}>
-      <body>{children}</body>
+      <body className="bg-white min-h-screen">{children}</body>
     </html>
   );
 }
