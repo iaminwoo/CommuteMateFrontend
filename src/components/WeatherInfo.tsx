@@ -2,21 +2,17 @@ import type { Weather } from "@/types/api";
 import Image from "next/image";
 
 export default function WeatherInfo({ weather }: { weather: Weather[] }) {
+  // 배열 자체 없거나 비어있으면 렌더링 안함
   if (!weather || weather.length === 0) return null;
 
   const [current, ...forecast] = weather;
 
-  const skyCodeTextMap: Record<number, string> = {
-    1: "맑음 밤",
-    2: "맑음 낮",
-    3: "구름많음 밤",
-    4: "구름많음 낮",
-    5: "흐림 밤",
-    6: "흐림 낮",
-    7: "비",
-    8: "비+눈",
-    9: "눈",
-  };
+  // current 속성 안전 체크
+  const currentSky = current?.sky_code ?? 0;
+  const currentTemp = current?.temp ?? "-";
+  const currentHumidity = current?.humidity ?? "-";
+  const currentPrecipitation = current?.precipitation_amount ?? "-";
+  const currentWind = current?.wind ?? "정보 없음";
 
   const skyCodeIconMap: Record<number, string> = {
     1: "/icons/NB01_N.png",
@@ -38,7 +34,7 @@ export default function WeatherInfo({ weather }: { weather: Weather[] }) {
         <div className="flex gap-4 justify-center items-center ">
           <div className="relative w-25 h-25 flex items-center justify-center">
             <Image
-              src={skyCodeIconMap[current.sky_code]}
+              src={skyCodeIconMap[currentSky] ?? "/icons/NB01.png"}
               alt="날씨 아이콘"
               fill
               className="object-cover rounded-xl"
@@ -47,17 +43,13 @@ export default function WeatherInfo({ weather }: { weather: Weather[] }) {
           </div>
           <div>
             <p className="text-gray-600 text-base">
-              {current.temp}℃ ({current.humidity}%)
+              {currentTemp}℃ ({currentHumidity}%)
             </p>
-            {[7, 8, 9].includes(current.sky_code) && (
-              <>
-                <p className="font-semibold text-base">
-                  {current.precipitation_amount}
-                </p>
-              </>
+            {[7, 8, 9].includes(currentSky) && (
+              <p className="font-semibold text-base">{currentPrecipitation}</p>
             )}
-            {current.wind !== "약한 바람" && (
-              <p className="font-semibold text-base">{current.wind}</p>
+            {currentWind !== "약한 바람" && (
+              <p className="font-semibold text-base">{currentWind}</p>
             )}
           </div>
         </div>
@@ -65,38 +57,47 @@ export default function WeatherInfo({ weather }: { weather: Weather[] }) {
 
       {/* 시간대별 날씨 */}
       <ul className="flex justify-between gap-2">
-        {forecast.map((w, idx) => (
-          <li
-            key={idx}
-            className="flex-grow p-2 rounded bg-[#EAF5D4] border-gray-200 rounded-xl"
-          >
-            <div className="flex flex-col gap-2 items-center">
-              <h4 className="font-semibold text-gray-800">{w.time}</h4>
-              <div className="relative w-16 h-16 flex items-center justify-center">
-                <Image
-                  src={skyCodeIconMap[w.sky_code]}
-                  alt="날씨 아이콘"
-                  fill
-                  className="object-cover rounded-xl"
-                  sizes="(max-width: 768px) 25vw, (max-width: 1200px) 10vw, 64px"
-                />
-              </div>
-              <div className="flex flex-col items-center justify-center">
-                <p className="text-gray-600">
-                  {w.temp}℃ ({w.humidity}%)
-                </p>
+        {forecast.map((w, idx) => {
+          if (!w) return null; // 항목 자체가 없으면 건너뜀
+          const wSky = w?.sky_code ?? 1;
+          const wTemp = w?.temp ?? "-";
+          const wHumidity = w?.humidity ?? "-";
+          const wPrecipitation = w?.precipitation_amount ?? "-";
+          const wWind = w?.wind ?? "정보 없음";
 
-                {[7, 8, 9].includes(w.sky_code) && (
-                  <p className="font-semibold">{w.precipitation_amount}</p>
-                )}
-
-                {w.wind !== "약한 바람" && (
-                  <p className="font-semibold">{w.wind}</p>
-                )}
+          return (
+            <li
+              key={idx}
+              className="flex-grow p-2 rounded bg-[#EAF5D4] border-gray-200 rounded-xl"
+            >
+              <div className="flex flex-col gap-2 items-center">
+                <h4 className="font-semibold text-gray-800">
+                  {w?.time ?? "-"}
+                </h4>
+                <div className="relative w-16 h-16 flex items-center justify-center">
+                  <Image
+                    src={skyCodeIconMap[wSky] ?? "/icons/NB01.png"}
+                    alt="날씨 아이콘"
+                    fill
+                    className="object-cover rounded-xl"
+                    sizes="(max-width: 768px) 25vw, (max-width: 1200px) 10vw, 64px"
+                  />
+                </div>
+                <div className="flex flex-col items-center justify-center">
+                  <p className="text-gray-600">
+                    {wTemp}℃ ({wHumidity}%)
+                  </p>
+                  {[7, 8, 9].includes(wSky) && (
+                    <p className="font-semibold">{wPrecipitation}</p>
+                  )}
+                  {wWind !== "약한 바람" && (
+                    <p className="font-semibold">{wWind}</p>
+                  )}
+                </div>
               </div>
-            </div>
-          </li>
-        ))}
+            </li>
+          );
+        })}
       </ul>
     </section>
   );

@@ -9,6 +9,7 @@ import Image from "next/image";
 export default function Home() {
   const [data, setData] = useState<ApiResponse | null>(null);
   const [initialLoading, setInitialLoading] = useState(true);
+  const [countdown, setCountdown] = useState(15); // 15초 카운트다운
 
   const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -22,28 +23,31 @@ export default function Home() {
         console.error("데이터 불러오기 실패:", err);
       } finally {
         setInitialLoading(false);
+        setCountdown(15); // 데이터 갱신 시 카운트다운 초기화
       }
     }
   };
 
   useEffect(() => {
-    // 처음 로드
     fetchData();
 
     // 15초마다 자동 갱신
-    const interval = setInterval(fetchData, 15000);
+    const intervalFetch = setInterval(fetchData, 15000);
+
+    // 1초마다 카운트다운 감소
+    const intervalCountdown = setInterval(() => {
+      setCountdown((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
 
     // 페이지가 다시 활성화되면 즉시 갱신
     const handleVisibility = () => {
-      if (!document.hidden) {
-        fetchData();
-      }
+      if (!document.hidden) fetchData();
     };
-
     document.addEventListener("visibilitychange", handleVisibility);
 
     return () => {
-      clearInterval(interval);
+      clearInterval(intervalFetch);
+      clearInterval(intervalCountdown);
       document.removeEventListener("visibilitychange", handleVisibility);
     };
   }, []);
@@ -74,10 +78,13 @@ export default function Home() {
           <>
             {data && (
               <>
-                <BusInfo buses={data.bus} />
-                <WeatherInfo weather={data.weather} />
+                {data?.bus?.length > 0 && <BusInfo buses={data.bus} />}
+                {data?.weather?.length > 0 && (
+                  <WeatherInfo weather={data.weather} />
+                )}
+
                 <p className="text-center mt-4 font-semibold text-gray-400">
-                  * 15초마다 최신 정보로 갱신됩니다.
+                  * 15초마다 최신 정보로 갱신됩니다. ({countdown}초 후 갱신)
                 </p>
               </>
             )}
