@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={SUIT.className}>
-      <body>{children}</body>
+      <body className="text-sm">{children}</body>
     </html>
   );
 }

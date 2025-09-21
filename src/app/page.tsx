@@ -5,12 +5,14 @@ import type { ApiResponse } from "@/types/api";
 import BusInfo from "@/components/BusInfo";
 import WeatherInfo from "@/components/WeatherInfo";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [data, setData] = useState<ApiResponse | null>(null);
   const [initialLoading, setInitialLoading] = useState(true);
   const [countdown, setCountdown] = useState(15); // 15초 카운트다운
 
+  const router = useRouter();
   const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const fetchData = async () => {
@@ -86,6 +88,13 @@ export default function Home() {
                 <p className="text-center mt-4 font-semibold text-gray-400">
                   * 15초마다 최신 정보로 갱신됩니다. ({countdown}초 후 갱신)
                 </p>
+
+                <button
+                  className="px-6 py-3 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                  onClick={() => router.push("/check")}
+                >
+                  근무 확인
+                </button>
               </>
             )}
           </>
