@@ -33,7 +33,9 @@ export default function Check() {
 
   return (
     <div className="flex flex-col gap-4 items-center min-h-screen p-4">
-      <h1 className="text-4xl font-bold">오늘의 근무</h1>
+      <h1 className="mt-2 px-4 py-1 bg-[#5E734F] text-white text-xl font-semibold rounded-xl">
+        오늘의 근무
+      </h1>
 
       {loading && <p>로딩 중...</p>}
 
@@ -42,7 +44,7 @@ export default function Check() {
           <p className="text-center font-semibold text-lg">
             {employeeSchedule.date} 오늘의 근무 인원
           </p>
-          <div className="text-gray-700 border p-4 w-full max-w-md bg-white rounded">
+          <div className="text-gray-700 border p-4 w-full max-w-md bg-[#EAF5D4] rounded">
             {employeeSchedule.total === 0 ? (
               <p>오늘 근무하는 직원이 없습니다.</p>
             ) : (
@@ -65,7 +67,7 @@ export default function Check() {
                   {employeeSchedule.employee_part.map((part) => (
                     <div
                       key={part.part_name}
-                      className="border border-gray-300 rounded-lg px-3 py-1"
+                      className="border border-gray-300 bg-white rounded-lg px-3 py-1"
                     >
                       <h3 className="font-bold text-base">{part.part_name}</h3>
 
@@ -100,19 +102,19 @@ export default function Check() {
 
       <div className="flex gap-2 mt-4">
         <button
-          className="px-6 py-3 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+          className="px-6 py-3 bg-[#5E734F] text-white rounded-lg hover:bg-[#4B5C3F] transition"
           onClick={() => router.push("/check/search")}
         >
           근무 조회
         </button>
         <button
-          className="px-6 py-3 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+          className="px-6 py-3 bg-[#5E734F] text-white rounded-lg hover:bg-[#4B5C3F] transition"
           onClick={() => router.push("/check/intersection")}
         >
           근무 교집합
         </button>
         <button
-          className="px-6 py-3 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+          className="px-6 py-3 bg-[#5E734F] text-white rounded-lg hover:bg-[#4B5C3F] transition"
           onClick={() => router.push("/schedule/dayoffs")}
         >
           근무 관리

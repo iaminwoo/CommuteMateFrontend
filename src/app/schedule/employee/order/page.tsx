@@ -98,10 +98,12 @@ export default function Order() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-start min-h-screen bg-gray-100 p-6">
-      <h1 className="text-3xl font-bold mb-4">직원 순서 변경</h1>
+    <div className="flex flex-col items-center min-h-screen p-4">
+      <h1 className="mt-2 px-4 py-1 bg-[#5E734F] text-white text-xl font-semibold rounded-xl">
+        직원 순서 변경
+      </h1>
 
-      <div className="w-full max-w-2xl bg-white shadow rounded p-4 mb-4">
+      <div className="w-full max-w-2xl bg-white rounded p-4 mb-4">
         <h2 className="text-xl font-semibold mb-3">직원 명단</h2>
 
         {loading ? (
@@ -155,11 +157,11 @@ export default function Order() {
         )}
       </div>
 
-      <div className="w-full max-w-2xl flex justify-end">
+      <div className="w-full max-w-2xl flex justify-center">
         <button
           onClick={handleSave}
           disabled={saving || loading || employees.length === 0}
-          className="px-4 py-2 bg-blue-600 text-white rounded shadow disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-50 py-3 bg-[#5E734F] text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#4B5C3F] transition"
         >
           {saving ? "저장 중..." : "저장하기"}
         </button>

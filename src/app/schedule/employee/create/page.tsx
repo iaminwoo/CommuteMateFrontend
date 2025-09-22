@@ -40,11 +40,13 @@ export default function Create() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-4xl font-bold mb-4">직원 생성 페이지</h1>
+    <div className="flex flex-col items-center min-h-screen p-4">
+      <h1 className="mt-2 px-4 py-1 bg-[#5E734F] text-white text-xl font-semibold rounded-xl">
+        직원 생성 페이지
+      </h1>
 
       <form
-        className="bg-white p-6 rounded shadow-md w-full max-w-md"
+        className="bg-white p-6 rounded w-full max-w-md"
         onSubmit={handleSubmit}
       >
         <div className="mb-4">
@@ -59,7 +61,7 @@ export default function Create() {
         </div>
 
         <div className="mb-4">
-          <label className="block font-semibold mb-1">기본 포지션 (선택)</label>
+          <label className="block font-semibold mb-1">기본 포지션</label>
           <select
             className="w-full border px-3 py-2 rounded"
             value={defaultPosition}
@@ -77,9 +79,9 @@ export default function Create() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition"
+          className="w-full py-3 bg-[#5E734F] text-white rounded-lg hover:bg-[#4B5C3F] transition"
         >
-          {loading ? "저장 중..." : "저장하기"}
+          {loading ? "저장 중..." : "저장"}
         </button>
       </form>
     </div>

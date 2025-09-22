@@ -99,8 +99,10 @@ export default function Intersection() {
   ];
 
   return (
-    <div className="p-4 flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-3xl font-bold mb-4">근무 교집합 조회</h1>
+    <div className="p-4 flex flex-col items-center min-h-screen gap-4">
+      <h1 className="mt-2 px-4 py-1 bg-[#5E734F] text-white text-xl font-semibold rounded-xl">
+        근무 교집합 조회
+      </h1>
 
       <input
         type="month"
@@ -123,7 +125,7 @@ export default function Intersection() {
             />
             {dropdowns.length > 1 && (
               <button
-                className="px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+                className="px-3 py-2 bg-[#E14631] text-white rounded-lg hover:bg-[#B53828] transition"
                 onClick={() => removeDropdown(id)}
               >
                 삭제
@@ -133,7 +135,7 @@ export default function Intersection() {
         ))}
         <div className="flex justify-center gap-4 mb-4 pb-3 border-b">
           <button
-            className="px-3 py-1 bg-green-700 text-white rounded w-20 hover:bg-green-600"
+            className="px-3 py-1 bg-[#EAF5D4] border text-gray-700 rounded-lg w-20 hover:bg-[#D5DED7] transition"
             onClick={addDropdown}
           >
             추가
@@ -141,7 +143,7 @@ export default function Intersection() {
 
           <button
             onClick={fetchWorkIntersection}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            className="px-4 py-2 border bg-[#5E734F] text-white rounded-lg hover:bg-[#4B5C3F] transition"
           >
             조회하기
           </button>

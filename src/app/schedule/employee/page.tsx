@@ -16,25 +16,27 @@ export default function Employee() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-4xl font-bold mb-4">직원 관리 페이지</h1>
+    <div className="flex flex-col items-center min-h-screen p-4">
+      <h1 className="mt-2 px-4 py-1 bg-[#5E734F] text-white text-xl font-semibold rounded-xl">
+        직원 관리 페이지
+      </h1>
 
-      <div className="flex gap-2">
+      <div className="flex gap-2 mt-4">
         <button
-          className="px-6 py-3 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+          className="px-6 py-3 bg-[#5E734F] text-white rounded-lg hover:bg-[#4B5C3F] transition"
           onClick={() => router.push("/schedule/employee/create")}
         >
           직원 추가
         </button>
         <button
-          className="px-6 py-3 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+          className="px-6 py-3 bg-[#5E734F] text-white rounded-lg hover:bg-[#4B5C3F] transition"
           onClick={() => router.push("/schedule/employee/order")}
         >
           순서 변경
         </button>
       </div>
 
-      <div className="w-full max-w-md bg-white shadow rounded p-4">
+      <div className="min-w-70 max-w-md bg-white rounded-lg border p-4 mt-2">
         <h2 className="text-xl font-semibold mb-4">직원 명단</h2>
         <ul>
           {employees.map((emp) => (

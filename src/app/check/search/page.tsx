@@ -31,12 +31,14 @@ export default function Search() {
   }, [selectedDate, API_BASE]);
 
   return (
-    <div className="flex flex-col gap-4 items-center min-h-screen bg-gray-100 p-4">
-      <h1 className="text-4xl font-bold">날짜별 근무 조회</h1>
+    <div className="flex flex-col gap-4 items-center min-h-screen p-4">
+      <h1 className="mt-2 px-4 py-1 bg-[#5E734F] text-white text-xl font-semibold rounded-xl">
+        날짜별 근무 조회
+      </h1>
 
       <div className="mt-4 flex items-center gap-2">
         <button
-          className="px-4 py-2 bg-gray-200 rounded border font-semibold hover:bg-gray-300"
+          className="px-4 py-2 bg-[#EAF5EC] rounded border font-semibold hover:bg-[#D5DED7] transition"
           onClick={() => {
             const prev = new Date(selectedDate);
             prev.setDate(prev.getDate() - 1);
@@ -54,7 +56,7 @@ export default function Search() {
         />
 
         <button
-          className="px-4 py-2 bg-gray-200 rounded border font-semibold hover:bg-gray-300"
+          className="px-4 py-2 bg-[#EAF5EC] rounded border font-semibold hover:bg-[#D5DED7] transition"
           onClick={() => {
             const next = new Date(selectedDate);
             next.setDate(next.getDate() + 1);
@@ -69,7 +71,7 @@ export default function Search() {
 
       {!loading && employeeSchedule && (
         <div className="w-75">
-          <div className="text-gray-700 border p-4 w-full max-w-md bg-white rounded">
+          <div className="text-gray-700 border p-4 w-full max-w-md bg-[#EAF5D4] rounded">
             {employeeSchedule.total === 0 ? (
               <p>해당 날짜 근무하는 직원이 없습니다.</p>
             ) : (
@@ -92,7 +94,7 @@ export default function Search() {
                   {employeeSchedule.employee_part.map((part) => (
                     <div
                       key={part.part_name}
-                      className="border border-gray-300 rounded-lg px-3 py-1"
+                      className="border border-gray-300 rounded-lg bg-white px-3 py-1"
                     >
                       <h3 className="font-bold text-base">{part.part_name}</h3>
 

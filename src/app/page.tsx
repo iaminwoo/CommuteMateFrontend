@@ -55,7 +55,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="flex min-h-screen flex-col justify-center items-center px-4 py-6">
+    <main className="flex min-h-screen flex-col justify-center items-center px-4 py-4">
       <div className="w-full max-w-[412px] text-sm">
         <div className="w-full flex flex-col items-center justify-center mb-4">
           <div className="relative w-50 h-40">
@@ -89,12 +89,14 @@ export default function Home() {
                   * 15초마다 최신 정보로 갱신됩니다. ({countdown}초 후 갱신)
                 </p>
 
-                <button
-                  className="px-6 py-3 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
-                  onClick={() => router.push("/check")}
-                >
-                  근무 확인
-                </button>
+                <div className="w-full flex justify-center mt-2">
+                  <button
+                    className="px-12 py-3 bg-[#5E734F] text-white font-bold rounded-lg hover:bg-[#4B5C3F] transition"
+                    onClick={() => router.push("/check")}
+                  >
+                    근무 확인
+                  </button>
+                </div>
               </>
             )}
           </>

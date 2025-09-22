@@ -106,10 +106,12 @@ export default function Position() {
   const [newPosition, setNewPosition] = useState("");
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-4xl font-bold mb-4">포지션 수정</h1>
+    <div className="flex flex-col items-center min-h-screen p-4">
+      <h1 className="mt-2 px-4 py-1 bg-[#5E734F] text-white text-xl font-semibold rounded-xl">
+        포지션 수정
+      </h1>
 
-      <div className="flex flex-col items-center justify-center gap-4">
+      <div className="flex flex-col items-center justify-center gap-4 mt-6">
         <div className="flex gap-2">
           <EmployeeDropdown
             value={selectedEmployeeId}
@@ -161,15 +163,9 @@ export default function Position() {
                 setNewDate("");
                 setNewPosition("");
               }}
-              className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition"
+              className="px-4 py-2 bg-[#EAF5EC] rounded border hover:bg-[#D5DED7] transition"
             >
               추가
-            </button>
-            <button
-              onClick={savePositions}
-              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
-            >
-              저장하기
             </button>
           </div>
         )}
@@ -185,16 +181,16 @@ export default function Position() {
           <table className="border-collapse border border-gray-400 text-sm mt-2">
             <thead>
               <tr>
-                <th className="border border-gray-400 px-2 py-1 bg-gray-200">
+                <th className="border border-gray-400 px-2 py-1 bg-[#EAF5D4]">
                   순서
                 </th>
-                <th className="border border-gray-400 px-2 py-1 bg-gray-200">
+                <th className="border border-gray-400 px-2 py-1 bg-[#EAF5D4]">
                   날짜
                 </th>
-                <th className="border border-gray-400 px-2 py-1 bg-gray-200">
+                <th className="border border-gray-400 px-2 py-1 bg-[#EAF5D4]">
                   포지션
                 </th>
-                <th className="border border-gray-400 px-2 py-1 bg-gray-200">
+                <th className="border border-gray-400 px-2 py-1 bg-[#EAF5D4]">
                   삭제
                 </th>
               </tr>
@@ -222,6 +218,13 @@ export default function Position() {
             </tbody>
           </table>
         )}
+
+        <button
+          onClick={savePositions}
+          className="w-full py-3 bg-[#5E734F] text-white rounded-lg hover:bg-[#4B5C3F] transition"
+        >
+          저장하기
+        </button>
       </div>
     </div>
   );

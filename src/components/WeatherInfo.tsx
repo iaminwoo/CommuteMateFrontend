@@ -29,10 +29,10 @@ export default function WeatherInfo({ weather }: { weather: Weather[] }) {
   return (
     <section>
       {/* 현재 날씨 */}
-      <div className="p-4 rounded-xl bg-[#EAF5D4] border-gray-200 mb-2">
+      <div className="px-4 py-2 rounded-xl bg-[#EAF5D4] border-gray-200 mb-2">
         <p className="text-center font-semibold text-gray-800">현재 날씨</p>
         <div className="flex gap-4 justify-center items-center ">
-          <div className="relative w-25 h-25 flex items-center justify-center">
+          <div className="relative w-20 h-20 flex items-center justify-center">
             <Image
               src={skyCodeIconMap[currentSky] ?? "/icons/NB01.png"}
               alt="날씨 아이콘"
@@ -74,7 +74,7 @@ export default function WeatherInfo({ weather }: { weather: Weather[] }) {
                 <h4 className="font-semibold text-gray-800">
                   {w?.time ?? "-"}
                 </h4>
-                <div className="relative w-16 h-16 flex items-center justify-center">
+                <div className="relative w-14 h-14 flex items-center justify-center">
                   <Image
                     src={skyCodeIconMap[wSky] ?? "/icons/NB01.png"}
                     alt="날씨 아이콘"
