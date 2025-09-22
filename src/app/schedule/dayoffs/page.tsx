@@ -133,7 +133,7 @@ export default function DayoffsPositions() {
         />
       </div>
 
-      <div className="w-full flex mt-4 mb-2 justify-start">
+      <div className="w-full max-w-4xl flex mt-4 mb-2 justify-start">
         <h2 className="text-xl font-semibold">해당 달 근무표</h2>
       </div>
 
