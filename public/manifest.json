@@ -1,6 +1,6 @@
 {
-  "name": "출근도우미",
-  "short_name": "출근도우미",
+  "name": "출근빵 : 출근도우미",
+  "short_name": "출근빵",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
