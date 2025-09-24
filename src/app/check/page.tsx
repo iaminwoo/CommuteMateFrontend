@@ -14,8 +14,14 @@ export default function Check() {
     const fetchTodaySchedule = async () => {
       setLoading(true);
       try {
-        const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
-        const res = await fetch(`${API_BASE}/employees/schedules/${today}`);
+        // 브라우저 로컬 기준 날짜
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, "0");
+        const dd = String(today.getDate()).padStart(2, "0");
+        const kstDate = `${yyyy}-${mm}-${dd}`; // "YYYY-MM-DD"
+
+        const res = await fetch(`${API_BASE}/employees/schedules/${kstDate}`);
 
         if (!res.ok) throw new Error(`서버 오류: ${res.status}`);
 

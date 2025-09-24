@@ -3,9 +3,13 @@ import { EmployeeSchedule } from "@/types/employee";
 import { useEffect, useState } from "react";
 
 export default function Search() {
-  const [selectedDate, setSelectedDate] = useState(
-    new Date().toISOString().split("T")[0]
-  ); // YYYY-MM-DD
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, "0");
+  const dd = String(today.getDate()).padStart(2, "0");
+
+  const [selectedDate, setSelectedDate] = useState(`${yyyy}-${mm}-${dd}`);
+
   const [employeeSchedule, setEmployeeSchedule] = useState<EmployeeSchedule>();
   const [loading, setLoading] = useState(false);
 
@@ -42,7 +46,12 @@ export default function Search() {
           onClick={() => {
             const prev = new Date(selectedDate);
             prev.setDate(prev.getDate() - 1);
-            setSelectedDate(prev.toISOString().split("T")[0]);
+
+            const yyyy = prev.getFullYear();
+            const mm = String(prev.getMonth() + 1).padStart(2, "0");
+            const dd = String(prev.getDate()).padStart(2, "0");
+
+            setSelectedDate(`${yyyy}-${mm}-${dd}`);
           }}
         >
           이전
@@ -60,7 +69,12 @@ export default function Search() {
           onClick={() => {
             const next = new Date(selectedDate);
             next.setDate(next.getDate() + 1);
-            setSelectedDate(next.toISOString().split("T")[0]);
+
+            const yyyy = next.getFullYear();
+            const mm = String(next.getMonth() + 1).padStart(2, "0");
+            const dd = String(next.getDate()).padStart(2, "0");
+
+            setSelectedDate(`${yyyy}-${mm}-${dd}`);
           }}
         >
           다음
