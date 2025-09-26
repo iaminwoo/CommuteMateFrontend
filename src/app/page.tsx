@@ -19,6 +19,11 @@ export default function Home() {
     if (!document.hidden) {
       try {
         const res = await fetch(`${API_BASE}/api/info`);
+
+        if (!res.ok) {
+          throw new Error(`서버 오류: ${res.status}`);
+        }
+
         const json: ApiResponse = await res.json();
         setData(json);
       } catch (err) {
@@ -88,17 +93,25 @@ export default function Home() {
                 <p className="text-center mt-4 font-semibold text-gray-400">
                   * 15초마다 최신 정보로 갱신됩니다. ({countdown}초 후 갱신)
                 </p>
-
-                <div className="w-full flex justify-center mt-2">
-                  <button
-                    className="px-12 py-3 bg-[#5E734F] text-white font-bold rounded-lg hover:bg-[#4B5C3F] transition"
-                    onClick={() => router.push("/check")}
-                  >
-                    근무 확인
-                  </button>
-                </div>
               </>
             )}
+
+            {!data && (
+              <p className="text-center text-red-500">
+                데이터를 불러오지 못했습니다.
+                <br />
+                {countdown}초 후 자동으로 다시 시도합니다.
+              </p>
+            )}
+
+            <div className="w-full flex justify-center mt-2">
+              <button
+                className="px-12 py-3 bg-[#5E734F] text-white font-bold rounded-lg hover:bg-[#4B5C3F] transition"
+                onClick={() => router.push("/check")}
+              >
+                근무 확인
+              </button>
+            </div>
           </>
         )}
       </div>
