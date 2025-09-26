@@ -103,17 +103,17 @@ export default function Home() {
                 {countdown}초 후 자동으로 다시 시도합니다.
               </p>
             )}
-
-            <div className="w-full flex justify-center mt-2">
-              <button
-                className="px-12 py-3 bg-[#5E734F] text-white font-bold rounded-lg hover:bg-[#4B5C3F] transition"
-                onClick={() => router.push("/check")}
-              >
-                근무 확인
-              </button>
-            </div>
           </>
         )}
+
+        <div className="w-full flex justify-center mt-2">
+          <button
+            className="px-12 py-3 bg-[#5E734F] text-white font-bold rounded-lg hover:bg-[#4B5C3F] transition"
+            onClick={() => router.push("/check")}
+          >
+            근무 확인
+          </button>
+        </div>
       </div>
     </main>
   );
