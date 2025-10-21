@@ -29,3 +29,10 @@
     -moz-osx-font-smoothing: grayscale;
   }
 }
+
+.prevent-scroll-restore {
+  /* 스크롤 복원을 막기 위해 overflow-y를 hidden으로 설정 */
+  overflow-y: hidden !important; 
+  /* iOS의 스크롤 튕김 효과를 막음 */
+  overscroll-behavior-y: none;
+}
