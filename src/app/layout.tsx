@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
+import Navbar from "@/components/Navbar";
+import { MainContentWrapper } from "@/components/MainContentWrapper";
 
 const SUIT = localFont({
   src: [
@@ -30,7 +32,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={SUIT.className}>
-      <body className="text-sm">{children}</body>
+      <body className="text-sm">
+        <Navbar />
+        <MainContentWrapper>{children}</MainContentWrapper>
+      </body>
     </html>
   );
 }
