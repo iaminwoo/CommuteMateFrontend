@@ -3,6 +3,7 @@ import "./globals.css";
 import localFont from "next/font/local";
 import Navbar from "@/components/Navbar";
 import { MainContentWrapper } from "@/components/MainContentWrapper";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 const SUIT = localFont({
   src: [
@@ -33,6 +34,7 @@ export default function RootLayout({
   return (
     <html lang="ko" className={SUIT.className}>
       <body className="text-sm">
+        <ScrollToTop />
         <Navbar />
         <MainContentWrapper>{children}</MainContentWrapper>
       </body>
