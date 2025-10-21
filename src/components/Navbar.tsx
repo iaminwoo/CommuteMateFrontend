@@ -30,13 +30,13 @@ export default function Navbar() {
 
       <div className="flex gap-2 font-semibold">
         <button
-          className="bg-[#EAF5D4] px-3 py-1 rounded hover:bg-blue-600"
+          className="bg-[#EAF5D4] px-3 py-1 rounded hover:bg-[#d5dfc0]"
           onClick={() => router.push("/check")}
         >
           근무조회
         </button>
         <button
-          className="bg-[#EAF5D4] px-3 py-1 rounded hover:bg-blue-600"
+          className="bg-[#EAF5D4] px-3 py-1 rounded hover:bg-[#d5dfc0]"
           onClick={() => router.push("/")}
         >
           메인으로

@@ -9,6 +9,7 @@ export function ScrollToTop() {
 
   useEffect(() => {
     // 1. 스크롤 복원을 막기 위해 body에 클래스 추가
+    console.log("Path changed:", pathname);
     document.body.classList.add("prevent-scroll-restore");
 
     // 2. bfcache 복원 이벤트 처리 (유지)
@@ -24,6 +25,7 @@ export function ScrollToTop() {
     const timer = setTimeout(() => {
       window.scrollTo(0, 0); // 강제 스크롤
       document.body.classList.remove("prevent-scroll-restore"); // 클래스 제거
+      console.log("Scroll restoration prevented and finished.");
     }, 100); // 100ms 지연으로 충분한 시간을 확보
 
     return () => {
