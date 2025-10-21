@@ -10,32 +10,31 @@ export default function Check() {
 
   const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "";
 
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, "0");
+  const dd = String(today.getDate()).padStart(2, "0");
+
+  const [selectedDate, setSelectedDate] = useState(`${yyyy}-${mm}-${dd}`);
+
   useEffect(() => {
-    const fetchTodaySchedule = async () => {
+    const fetchSchedule = async (date: string) => {
       setLoading(true);
       try {
-        // 브라우저 로컬 기준 날짜
-        const today = new Date();
-        const yyyy = today.getFullYear();
-        const mm = String(today.getMonth() + 1).padStart(2, "0");
-        const dd = String(today.getDate()).padStart(2, "0");
-        const kstDate = `${yyyy}-${mm}-${dd}`; // "YYYY-MM-DD"
-
-        const res = await fetch(`${API_BASE}/employees/schedules/${kstDate}`);
-
+        const res = await fetch(`${API_BASE}/employees/schedules/${date}`);
         if (!res.ok) throw new Error(`서버 오류: ${res.status}`);
-
         const data = await res.json();
         setEmployeeSchedule(data);
       } catch (err) {
         console.error(err);
+        setEmployeeSchedule(undefined);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchTodaySchedule();
-  }, [API_BASE]);
+    fetchSchedule(selectedDate);
+  }, [selectedDate, API_BASE]);
 
   return (
     <div className="flex flex-col gap-4 items-center min-h-screen p-4">
@@ -43,13 +42,51 @@ export default function Check() {
         오늘의 근무
       </h1>
 
+      <div className="mt-4 flex items-center gap-2">
+        <button
+          className="px-4 py-2 bg-[#EAF5EC] rounded border font-semibold hover:bg-[#D5DED7] transition"
+          onClick={() => {
+            const prev = new Date(selectedDate);
+            prev.setDate(prev.getDate() - 1);
+
+            const yyyy = prev.getFullYear();
+            const mm = String(prev.getMonth() + 1).padStart(2, "0");
+            const dd = String(prev.getDate()).padStart(2, "0");
+
+            setSelectedDate(`${yyyy}-${mm}-${dd}`);
+          }}
+        >
+          이전
+        </button>
+
+        <input
+          type="date"
+          value={selectedDate}
+          onChange={(e) => setSelectedDate(e.target.value)}
+          className="border p-2 rounded"
+        />
+
+        <button
+          className="px-4 py-2 bg-[#EAF5EC] rounded border font-semibold hover:bg-[#D5DED7] transition"
+          onClick={() => {
+            const next = new Date(selectedDate);
+            next.setDate(next.getDate() + 1);
+
+            const yyyy = next.getFullYear();
+            const mm = String(next.getMonth() + 1).padStart(2, "0");
+            const dd = String(next.getDate()).padStart(2, "0");
+
+            setSelectedDate(`${yyyy}-${mm}-${dd}`);
+          }}
+        >
+          다음
+        </button>
+      </div>
+
       {loading && <p>로딩 중...</p>}
 
       {!loading && employeeSchedule && (
         <div className="w-75">
-          <p className="text-center font-semibold text-lg">
-            {employeeSchedule.date} 오늘의 근무 인원
-          </p>
           <div className="text-gray-700 border p-4 w-full max-w-md bg-[#EAF5D4] rounded">
             {employeeSchedule.total === 0 ? (
               <p>오늘 근무하는 직원이 없습니다.</p>
@@ -107,12 +144,6 @@ export default function Check() {
       )}
 
       <div className="flex gap-2 mt-4">
-        <button
-          className="px-6 py-3 bg-[#5E734F] text-white rounded-lg hover:bg-[#4B5C3F] transition"
-          onClick={() => router.push("/check/search")}
-        >
-          근무 조회
-        </button>
         <button
           className="px-6 py-3 bg-[#5E734F] text-white rounded-lg hover:bg-[#4B5C3F] transition"
           onClick={() => router.push("/check/intersection")}
