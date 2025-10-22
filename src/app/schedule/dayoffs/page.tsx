@@ -94,7 +94,7 @@ export default function DayoffsPositions() {
   const lastDay = new Date(year, month, 0).getDate();
 
   return (
-    <div className="flex flex-col items-center min-h-screen p-4">
+    <div className="flex flex-col items-center p-4">
       <h1 className="mt-2 px-4 py-1 bg-[#5E734F] text-white text-xl font-semibold rounded-xl">
         근무 + 포지션 관리
       </h1>

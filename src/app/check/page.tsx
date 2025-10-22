@@ -37,12 +37,12 @@ export default function Check() {
   }, [selectedDate, API_BASE]);
 
   return (
-    <div className="flex flex-col gap-4 items-center min-h-screen p-4">
+    <div className="flex flex-col gap-2 items-center p-4">
       <h1 className="mt-2 px-4 py-1 bg-[#5E734F] text-white text-xl font-semibold rounded-xl">
         오늘의 근무
       </h1>
 
-      <div className="mt-4 flex items-center gap-2">
+      <div className="mt-2 flex items-center gap-2">
         <button
           className="px-4 py-2 bg-[#EAF5EC] rounded border font-semibold hover:bg-[#D5DED7] transition"
           onClick={() => {
@@ -87,7 +87,7 @@ export default function Check() {
 
       {!loading && employeeSchedule && (
         <div className="w-75">
-          <div className="text-gray-700 border p-4 w-full max-w-md bg-[#EAF5D4] rounded">
+          <div className="text-gray-700 border py-2 px-4 w-full max-w-md bg-[#EAF5D4] rounded">
             {employeeSchedule.total === 0 ? (
               <p>오늘 근무하는 직원이 없습니다.</p>
             ) : (
@@ -143,7 +143,7 @@ export default function Check() {
         </div>
       )}
 
-      <div className="flex gap-2 mt-4">
+      <div className="flex gap-2 mt-1">
         <button
           className="px-6 py-3 bg-[#5E734F] text-white rounded-lg hover:bg-[#4B5C3F] transition"
           onClick={() => router.push("/check/intersection")}

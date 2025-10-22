@@ -99,7 +99,7 @@ export default function Intersection() {
   ];
 
   return (
-    <div className="p-4 flex flex-col items-center min-h-screen gap-4">
+    <div className="p-4 flex flex-col items-center gap-4">
       <h1 className="mt-2 px-4 py-1 bg-[#5E734F] text-white text-xl font-semibold rounded-xl">
         근무 교집합 조회
       </h1>
