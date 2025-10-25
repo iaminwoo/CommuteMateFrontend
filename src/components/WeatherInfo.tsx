@@ -26,31 +26,76 @@ export default function WeatherInfo({ weather }: { weather: Weather[] }) {
     9: "/icons/NB11.png",
   };
 
+  // 기온별 옷차림 이미지 기준
+  const OUTFIT_RECOMMENDATIONS = [
+    { maxTemp: 5, clothes: "패딩, 두꺼운 코트, 목도리, 기모 제품" },
+    { maxTemp: 9, clothes: "코트, 가죽 재킷, 니트, 스카프, 두꺼운 바지" },
+    {
+      maxTemp: 11,
+      clothes: "재킷, 트렌치코트, 니트, 면바지, 청바지, 검은 스타킹",
+    },
+    {
+      maxTemp: 16,
+      clothes: "얇은 재킷, 가디건, 야상, 맨투맨, 니트, 살구색 스타킹",
+    },
+    {
+      maxTemp: 19,
+      clothes: "얇은 니트, 얇은 재킷, 가디건, 맨투맨, 면바지, 청바지",
+    },
+    { maxTemp: 22, clothes: "긴팔티, 얇은 가디건, 면바지, 청바지" },
+    { maxTemp: 26, clothes: "반팔티, 얇은 셔츠, 반바지, 면바지" },
+    { maxTemp: Infinity, clothes: "민소매티, 반바지, 반팔티, 치마" },
+  ];
+
+  const getOutfitRecommendation = (tempValue: string) => {
+    const currentTemp = parseInt(tempValue, 10);
+
+    if (isNaN(currentTemp)) {
+      return "기온 정보가 불명확합니다.";
+    }
+
+    const recommendation = OUTFIT_RECOMMENDATIONS.find((item) => {
+      return currentTemp <= item.maxTemp;
+    });
+
+    return recommendation ? recommendation.clothes : "옷차림 정보 없음";
+  };
+
+  const recommendedOutfit = getOutfitRecommendation(currentTemp);
+
   return (
     <section>
       {/* 현재 날씨 */}
       <div className="px-4 py-2 rounded-xl bg-[#EAF5D4] border-gray-200 mb-2">
-        <p className="text-center font-semibold text-gray-800">현재 날씨</p>
-        <div className="flex gap-4 justify-center items-center ">
-          <div className="relative w-20 h-20 flex items-center justify-center">
-            <Image
-              src={skyCodeIconMap[currentSky] ?? "/icons/NB01.png"}
-              alt="날씨 아이콘"
-              fill
-              className="object-cover rounded-xl"
-              sizes="(max-width: 768px) 25vw, (max-width: 1200px) 10vw, 64px"
-            />
+        <p className="text-center font-bold text-gray-800">현재 날씨</p>
+        <div className="flex flex-col justify-center items-center">
+          <div className="flex gap-4 justify-center items-center ">
+            <div className="relative w-20 h-20 flex items-center justify-center">
+              <Image
+                src={skyCodeIconMap[currentSky] ?? "/icons/NB01.png"}
+                alt="날씨 아이콘"
+                fill
+                className="object-cover rounded-xl"
+                sizes="(max-width: 768px) 25vw, (max-width: 1200px) 10vw, 64px"
+              />
+            </div>
+            <div>
+              <p className="text-gray-600 text-base">
+                {currentTemp}℃ ({currentHumidity}%)
+              </p>
+              {[7, 8, 9].includes(currentSky) && (
+                <p className="font-semibold text-base">
+                  {currentPrecipitation}
+                </p>
+              )}
+              {currentWind !== "약한 바람" && (
+                <p className="font-semibold text-base">{currentWind}</p>
+              )}
+            </div>
           </div>
-          <div>
-            <p className="text-gray-600 text-base">
-              {currentTemp}℃ ({currentHumidity}%)
-            </p>
-            {[7, 8, 9].includes(currentSky) && (
-              <p className="font-semibold text-base">{currentPrecipitation}</p>
-            )}
-            {currentWind !== "약한 바람" && (
-              <p className="font-semibold text-base">{currentWind}</p>
-            )}
+          <div className="text-xs">
+            <span className="font-bold">추천 옷차림 : </span>
+            {recommendedOutfit}
           </div>
         </div>
       </div>

@@ -62,7 +62,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col justify-center items-center px-4 py-4">
       <div className="w-full max-w-[412px] text-sm">
-        <div className="w-full flex flex-col items-center justify-center mb-4">
+        <div className="w-full flex flex-col items-center justify-center mb-2">
           <div className="relative w-50 h-40">
             <Image
               src="/busppang.png"
