@@ -93,7 +93,7 @@ export default function WeatherInfo({ weather }: { weather: Weather[] }) {
               )}
             </div>
           </div>
-          <div className="text-xs">
+          <div className="text-xs whitespace-nowrap">
             <span className="font-bold">추천 옷차림 : </span>
             {recommendedOutfit}
           </div>
@@ -119,7 +119,7 @@ export default function WeatherInfo({ weather }: { weather: Weather[] }) {
                 <h4 className="font-semibold text-gray-800">
                   {w?.time ?? "-"}
                 </h4>
-                <div className="relative w-14 h-14 flex items-center justify-center">
+                <div className="relative w-12 h-12 flex items-center justify-center">
                   <Image
                     src={skyCodeIconMap[wSky] ?? "/icons/NB01.png"}
                     alt="날씨 아이콘"
